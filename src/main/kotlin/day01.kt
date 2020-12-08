@@ -1,11 +1,9 @@
-import java.io.File
-
 fun main() {
-    File("input/day01.txt").readLines().let { lines ->
-        val data = lines.map { it.toInt() }
+    withInputData("day01.txt") { data ->
+        val intData = data.map { it.toInt() }
 
-        val sumOf2 = findSumOf2(data, 2020)
-        val sumOf3 = findSumOf3(data, 2020)
+        val sumOf2 = findSumOf2(intData, 2020)
+        val sumOf3 = findSumOf3(intData, 2020)
 
         println(sumOf2)
         println(sumOf3)
