@@ -1,5 +1,3 @@
-import kotlin.math.min
-
 fun main() {
     withInputData("day05.txt") { data ->
         // Vérif du decode
