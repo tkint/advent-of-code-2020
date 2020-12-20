@@ -5,11 +5,15 @@ fun main() {
     withInputData("day07.txt") { data ->
         val rules = data.map { Day07.Rule.fromString(it) }
 
-        val rulesWithShinyGold = rules.flatMap { rule ->
+        val bagsContainingAtLeastOneShinyGold = rules.flatMap { rule ->
             Day07.bagsWithAtLeastOne(rule, "shiny gold", rules)
         }.toSet()
 
-        println(rulesWithShinyGold.size)
+        println(bagsContainingAtLeastOneShinyGold.size)
+
+        val nbBagsInShinyGold = Day07.countRequiredBagsInOneColor(rules, "shiny gold")
+
+        println(nbBagsInShinyGold)
     }
 }
 
@@ -72,5 +76,17 @@ object Day07 {
         }
 
         return bags
+    }
+
+    fun countRequiredBagsInOneColor(rules: List<Rule>, color: String, depth: Int = 0): Int {
+        val rule = rules.find { it.color == color }
+            ?: throw Exception("Rule $color not found")
+
+        var nb = if (rule.color == color) 1 else 0
+        rule.children.map { (childColor, childNb) ->
+            nb += countRequiredBagsInOneColor(rules, childColor, depth + 1) * childNb
+        }
+
+        return if (depth == 0) nb - 1 else nb
     }
 }
