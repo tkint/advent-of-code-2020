@@ -13,9 +13,9 @@ fun main() {
 }
 
 object Day08 {
-    const val ACC = "acc"
-    const val JMP = "jmp"
-    const val NOP = "nop"
+    private const val ACC = "acc"
+    private const val JMP = "jmp"
+    private const val NOP = "nop"
 
     data class Instruction(
         val operation: String,
